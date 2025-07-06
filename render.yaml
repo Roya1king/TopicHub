@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: topic-hub
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn learn.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: learn.settings
+      - key: PYTHON_VERSION
+        value: 3.10
+      # Add Cloudinary and Secret Key from your .env manually on Render dashboard
