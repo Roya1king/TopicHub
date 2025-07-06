@@ -7,20 +7,22 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "learn.settings")
+    from django.core.management import execute_from_command_line
+
+    # ✅ Create superuser AFTER settings are loaded
+    from django.contrib.auth import get_user_model
+    from django.db.utils import OperationalError
+
     try:
-        from django.core.management import execute_from_command_line
-    except ImportError as exc:
-        raise ImportError(
-            "Couldn't import Django. Are you sure it's installed and "
-            "available on your PYTHONPATH environment variable? Did you "
-            "forget to activate a virtual environment?"
-        ) from exc
+        User = get_user_model()
+        if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser("admin", "admin@example.com", "admin")
+            print("✅ Superuser created: admin / admin")
+    except OperationalError:
+        print("⚠️  Database not ready, skipping superuser creation")
+
     execute_from_command_line(sys.argv)
 
 
 if __name__ == "__main__":
-    from django.contrib.auth import get_user_model
-    User = get_user_model()
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser("admin", "admin@example.com", "admin")
     main()
