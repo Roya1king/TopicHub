@@ -30,7 +30,8 @@ SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-nvqr8uifkd=3*)7$v*54fwd+5v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['topichub-veny.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
