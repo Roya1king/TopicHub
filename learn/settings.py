@@ -134,6 +134,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATICFILES_DIRS = [
     BASE_DIR / 'base/static'
 ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 # Cloudinary media storage
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
