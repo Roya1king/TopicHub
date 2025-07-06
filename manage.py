@@ -9,7 +9,11 @@ def main():
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "learn.settings")
     from django.core.management import execute_from_command_line
 
-    # ✅ Create superuser AFTER settings are loaded
+    # ✅ Set up Django
+    import django
+    django.setup()
+
+    # ✅ Now safe to use ORM
     from django.contrib.auth import get_user_model
     from django.db.utils import OperationalError
 
@@ -22,7 +26,6 @@ def main():
         print("⚠️  Database not ready, skipping superuser creation")
 
     execute_from_command_line(sys.argv)
-
 
 if __name__ == "__main__":
     main()
